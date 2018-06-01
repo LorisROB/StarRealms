@@ -27,19 +27,19 @@ int main(int argc, char const *argv[])
         if (flag ==1)
         {
             // Table de jeu
-            cout<<"Ecran"<<endl;
+            //cout<<"Ecran"<<endl;
             Ecran ecran(largeurFenetre,hauteurFenetre,"fond.jpg");
-            cout<<"Empalvements"<<endl;
+            //cout<<"Empalvements"<<endl;
             ecran.emplacements(ecran,flag);
-            //ecran.compteur_score1(3, ecran);
-            //ecran.compteur_score2(1, ecran);
-            //ecran.compteur_attack(2,ecran);
-            //ecran.compteur_argent(3, ecran);
-            //ecran.compteur_vie(4, ecran);
-            cout<<"Flip"<<endl;
+            ecran.compteur_score1(3, ecran);
+            ecran.compteur_score2(1, ecran);
+            ecran.compteur_attack(2,ecran);
+            ecran.compteur_argent(3, ecran);
+            ecran.compteur_vie(4, ecran);
+            //cout<<"Flip"<<endl;
             SDL_Flip(ecran.get_fenetre(ecran)); //On réactualise l'écran
             
-            cout<<"interaction"<<endl;
+            //cout<<"interaction"<<endl;
             ecran.interaction(ecran, flag); // On s'occupe de tous les évenements
             cout<<"TailleX de l'écran : "<<ecran.get_sizeX_ecran(ecran)<<endl;
             cout<<"TailleY de l'écran : "<<ecran.get_sizeY_ecran(ecran)<<endl;

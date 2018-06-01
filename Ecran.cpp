@@ -1,5 +1,8 @@
 #include "Ecran.hpp"
 
+Rectangle *R[40] = {NULL};
+int compteur_rect = 0;
+
 Ecran::Ecran(int largeur,int hauteur, string fond)
 {
 	largeurEcran=largeur;
@@ -292,17 +295,33 @@ int Ecran::interaction(Ecran ecran,int flag) // flag vaut 0 si menu et 1 sinon
                     {
                         x = corner_x(event.button.x,event.button.y); //On récupère les coordonnées de l'angle de l'emplacement ou l'on clique
                         y = corner_y(event.button.x,event.button.y);
-                        Image carte = Image("carte.jpg",0,1);
-                        if (x>=0 && y >= 0) //Si on est bien sur l'une des cases
+                        for (int i = 0; i<compteur_rect; i++)
                         {
-                            ecran.coller_image(500,500,carte,ecran,0,90,4);
+                            if (R[i]->x==x && R[i]->y==y)
+                            {
+                                if (R[i]->is_image==1) // Pas d'image 
+                                {
+                                    Image carte = Image("carte.jpg",0,1);
+                                    if (x>=0 && y >= 0) //Si on est bien sur l'une des cases
+                                    {
+                                     ecran.coller_image(500,500,carte,ecran,0,90,4);
+                                     R[i]->is_image = 0;
+                                    }
+                                } 
+                                else
+                                {
+                                    cout << "Griser image" << endl;
+                                }          
+                            }
                         }
+                        
                     }
 
 					if (event.button.button == SDL_BUTTON_LEFT && flag == 1) // Pour table de jeu
                 	{
                     	x = corner_x(event.button.x,event.button.y); //On récupère les coordonnées de l'angle de l'emplacement ou l'on clique
                     	y = corner_y(event.button.x,event.button.y);
+
                         Image carte = Image("carte.jpg",0,1);
                     	if (x>=0 && y >= 0) //Si on est bien sur l'une des cases
                     	{
@@ -374,6 +393,7 @@ void Ecran::emplacements(Ecran ecran, int flag)
 {
 	if (flag==1) //Si on est dans l'écran de jeu
 	{
+
     	//////////////////////PLACEMENTS DES RECTANGLES DES BASES A GAUCHE////////////////////
     	int k=0,l=0;
     	
@@ -382,6 +402,8 @@ void Ecran::emplacements(Ecran ecran, int flag)
             ecran.dessiner_rectangle(0,j,largeurBase, hauteurBase, 255-k, 255-k, 255-k, ecran);
             k=k+30;
             l++;
+            R[compteur_rect] = new Rectangle(0,j);
+            compteur_rect++;
         }
 
     	//////////////////////PLACEMENTS DES RECTANGLES DES BASES A DROITE////////////////////
@@ -392,6 +414,8 @@ void Ecran::emplacements(Ecran ecran, int flag)
             ecran.dessiner_rectangle(largeurFenetre-largeurBase,j,largeurBase, hauteurBase, k, k, k, ecran);
             k=k+30;
             l++;
+            R[compteur_rect] = new Rectangle(largeurFenetre-largeurBase,j);
+            compteur_rect++;
         }
     	
 
@@ -403,8 +427,12 @@ void Ecran::emplacements(Ecran ecran, int flag)
             ecran.dessiner_rectangle(i,0,largeurAchat, hauteurAchat, 255-k, 255-k, 255-k, ecran);
         	k=k+10;
         	l++;
+            R[compteur_rect] = new Rectangle(i,0);
+            compteur_rect++;
     	}
         ecran.dessiner_rectangle((largeurFenetre-6*largeurAchat-10)/2 + 5*largeurAchat+10,0,largeurAchat, hauteurAchat, 255-k-10, 255-k-10, 255-k-10, ecran);
+        R[compteur_rect] = new Rectangle((largeurFenetre-6*largeurAchat-10)/2 + 5*largeurAchat+10,0);
+        compteur_rect++;
 
 
         ///////////POSITION DE la main///////////////
@@ -417,14 +445,26 @@ void Ecran::emplacements(Ecran ecran, int flag)
                 ecran.dessiner_rectangle(i,j,largeurMain, hauteurMain, 255-k, 255-k, 255-k, ecran);
                 k=k+10;
                 l++;
+                R[compteur_rect] = new Rectangle(i,j);
+                compteur_rect++;
             }
         }
 
         ecran.dessiner_rectangle(10,10,70, 50, 238, 130, 238, ecran);
+        R[compteur_rect] = new Rectangle(10,10);
+        compteur_rect++;
         ecran.dessiner_rectangle(largeurFenetre-60,10,70, 50, 255, 127, 80, ecran);
+        R[compteur_rect] = new Rectangle(largeurFenetre-60,10);
+        compteur_rect++;
         ecran.dessiner_rectangle((largeurFenetre-6*largeurAchat-10)/2 + 6.2*largeurAchat+20,20,50, 50, 255, 0, 0, ecran); //Attack
+        R[compteur_rect] = new Rectangle((largeurFenetre-6*largeurAchat-10)/2 + 6.2*largeurAchat+20,20);
+        compteur_rect++;
         ecran.dessiner_rectangle((largeurFenetre-6*largeurAchat-10)/2 + 6.2*largeurAchat+20,80,50, 50, 255, 255, 0, ecran); //Argent
+        R[compteur_rect] = new Rectangle((largeurFenetre-6*largeurAchat-10)/2 + 6.2*largeurAchat+20,80);
+        compteur_rect++;
         ecran.dessiner_rectangle((largeurFenetre-6*largeurAchat-10)/2 + 6.2*largeurAchat+20,140,50, 50, 0, 255, 0, ecran); //Vie
+        R[compteur_rect] = new Rectangle((largeurFenetre-6*largeurAchat-10)/2 + 6.2*largeurAchat+20,140);
+        compteur_rect++;
        
 
     }

@@ -13,6 +13,7 @@
 #include <sstream>
 
 #include "Image.hpp"
+#include "Rectangle.hpp"
 
 using namespace std;
 

@@ -1,6 +1,6 @@
 CC=g++ 
-CCFLAGS= -O3 #Option d'optimisation du programme
-LIBFLAGS= -lSDL -lSDL_gfx -lSDL_image -lSDL_ttf
+CCFLAGS= -O3 -std=c++11 #Option d'optimisation du programme
+LIBFLAGS= -lSDL -lSDL_gfx -lSDL_image -lSDL_ttf 
 SRC= $(wildcard *.cpp)
 OBJ= $(SRC:.cpp=.o)
 EXEC= exec
