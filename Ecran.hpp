@@ -19,12 +19,12 @@ using namespace std;
 
 #define largeurFenetre 1600
 #define hauteurFenetre 1000
-#define largeurBase 200 
-#define hauteurBase 150
-#define largeurAchat 150
-#define hauteurAchat 200
-#define largeurMain 150
-#define hauteurMain 200
+#define largeurBase 225 
+#define hauteurBase 165
+#define largeurAchat 165
+#define hauteurAchat 225
+#define largeurMain 165
+#define hauteurMain 225
 
 class Ecran
 {

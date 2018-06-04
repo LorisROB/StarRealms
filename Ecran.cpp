@@ -40,110 +40,62 @@ SDL_Surface *Ecran::get_fenetre(Ecran ecran)
 
 int Ecran::corner_x(int x, int y)
 {
-	if ((x<=2*largeurBase) && (y>=(hauteurFenetre-6*hauteurBase)) && (y<=hauteurFenetre-(hauteurFenetre-6*hauteurBase))) //2 premieres colonnes
+	if ((x<=largeurBase) && (y>=(hauteurFenetre-6*hauteurBase)) && (y<=hauteurFenetre-(hauteurFenetre-6*hauteurBase))) //premiere colonne
     {
-        if(x<=largeurBase) //Prmeiere colonne a gauche
+        int j=(hauteurFenetre-6*hauteurBase);
+        while(y>j+hauteurBase)
         {
-            int j=(hauteurFenetre-6*hauteurBase);
-            while(y>j+hauteurBase)
-                {
-                    j = j + hauteurBase;
-                }
-                return 0;
+            j = j + hauteurBase;
         }
-
-        else //deuxieme colonne a gauche
-		{
-			int j=(hauteurFenetre-6*hauteurBase);
-			while(y>j+hauteurBase)
-			{
-				j = j + hauteurBase;
-			}
-			return largeurBase;
-
-        }
+        return 0;
 
 	}
 
 
-	else if ((x>=largeurFenetre-2*largeurBase) && (y>=(hauteurFenetre-6*hauteurBase)) && (y<=hauteurFenetre-(hauteurFenetre-6*hauteurBase)))
+	else if ((x>=largeurFenetre-largeurBase) && (y>=(hauteurFenetre-6*hauteurBase)) && (y<=hauteurFenetre-(hauteurFenetre-6*hauteurBase)))
     {
-        if(x<=largeurFenetre-largeurBase)
+        int j=(hauteurFenetre-6*hauteurBase);
+        while(y>j+hauteurBase)
         {
-            int j=(hauteurFenetre-6*hauteurBase);
-            while(y>j+hauteurBase)
-            {
-                j = j + hauteurBase;
-            }
-            return largeurFenetre-2*largeurBase;
+            j = j + hauteurBase;
         }
-
-        else
-        {
-            int j=(hauteurFenetre-6*hauteurBase);
-            while(y>j+hauteurBase)
-            {
-                j = j + hauteurBase;
-            }
-            return largeurFenetre-largeurBase;
-        }
+        return largeurFenetre-2*largeurBase;
+        
     }
 
     else
     {
     	return -1;
     }
+
 }
 
 int Ecran::corner_y(int x, int y)
 {
-	if ((x<=2*largeurBase) && (y>=(hauteurFenetre-6*hauteurBase)) && (y<=hauteurFenetre-(hauteurFenetre-6*hauteurBase))) //2 premieres colonnes
+	if ((x<=largeurBase) && (y>=(hauteurFenetre-6*hauteurBase)) && (y<=hauteurFenetre-(hauteurFenetre-6*hauteurBase))) //premiere colonne
     {
-        if(x<=largeurBase) //Prmeiere colonne a gauche
+    
+        int j=(hauteurFenetre-6*hauteurBase);
+        while(y>j+hauteurBase)
         {
-            int j=(hauteurFenetre-6*hauteurBase);
-            while(y>j+hauteurBase)
-                {
-                    j = j + hauteurBase;
-                }
-                return j;
+            j = j + hauteurBase;
         }
-
-        else //deuxieme colonne a gauche
-		{
-			int j=(hauteurFenetre-6*hauteurBase);
-			while(y>j+hauteurBase)
-			{
-				j = j + hauteurBase;
-			}
-			return j;
-
-        }
+        return j;
+       
 
 	}
 
 
-	else if ((x>=largeurFenetre-2*largeurBase) && (y>=(hauteurFenetre-6*hauteurBase)) && (y<=hauteurFenetre-(hauteurFenetre-6*hauteurBase)))
+	else if ((x>=largeurFenetre-largeurBase) && (y>=(hauteurFenetre-6*hauteurBase)) && (y<=hauteurFenetre-(hauteurFenetre-6*hauteurBase)))
     {
-        if(x<=largeurFenetre-largeurBase)
+        
+        int j=(hauteurFenetre-6*hauteurBase);
+        while(y>j+hauteurBase)
         {
-            int j=(hauteurFenetre-6*hauteurBase);
-            while(y>j+hauteurBase)
-            {
-                j = j + hauteurBase;
-            }
-            return j;
+            j = j + hauteurBase;
         }
-
-        else
-        {
-            int j=(hauteurFenetre-6*hauteurBase);
-            while(y>j+hauteurBase)
-            {
-                j = j + hauteurBase;
-            }
-            return j;
-        }
+        return j;
+        
     }
 
     else
@@ -181,7 +133,8 @@ void Ecran::compteur_score1(int score, Ecran ecran)
     std::stringstream ss;
     ss << score;
     std::string str = ss.str();
-    ecrire_texte(ecran, str,65,"angelina.TTF",10,10,255,255,255);
+    ecran.dessiner_rectangle(largeurBase+10,hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25,50, 50, 255, 0, 0, ecran);
+    ecrire_texte(ecran, str,35,"LongTime.ttf",largeurBase+10,hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25+2,0,0,0);
 }
 
 void Ecran::compteur_score2(int score, Ecran ecran)
@@ -189,7 +142,8 @@ void Ecran::compteur_score2(int score, Ecran ecran)
     std::stringstream ss;
     ss << score;
     std::string str = ss.str();
-    ecrire_texte(ecran, str,65,"angelina.TTF",ecran.get_sizeX_ecran(ecran)-60,10,255,255,255);
+    ecran.dessiner_rectangle(ecran.get_sizeX_ecran(ecran)-largeurBase-60,hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25,50, 50, 0, 0, 255, ecran);
+    ecrire_texte(ecran, str,35,"LongTime.ttf",ecran.get_sizeX_ecran(ecran)-largeurBase-60+5,hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25+2,0,0,0);
 }
 
 void Ecran::compteur_attack(int points, Ecran ecran)
@@ -197,7 +151,8 @@ void Ecran::compteur_attack(int points, Ecran ecran)
     std::stringstream ss;
     ss << points;
     std::string str = ss.str();
-    ecrire_texte(ecran, str,65,"angelina.TTF",(largeurFenetre-6*largeurAchat-10)/2 + 6.2*largeurAchat+20,20,255,255,255);
+    ecran.dessiner_rectangle(2.5*largeurMain-25+largeurBase+(ecran.get_sizeX_ecran(ecran)-2*largeurBase-5*largeurMain)/2,hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25,50, 50, 255, 0, 0, ecran); //Carré Attack
+    ecrire_texte(ecran, str,35,"LongTime.ttf",5+2.5*largeurMain-25+largeurBase+(ecran.get_sizeX_ecran(ecran)-2*largeurBase-5*largeurMain)/2,hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25,0,0,0);
 }
 
 void Ecran::compteur_argent(int points, Ecran ecran)
@@ -205,7 +160,8 @@ void Ecran::compteur_argent(int points, Ecran ecran)
     std::stringstream ss;
     ss << points;
     std::string str = ss.str();
-    ecrire_texte(ecran, str,65,"angelina.TTF",(largeurFenetre-6*largeurAchat-10)/2 + 6.2*largeurAchat+20,80,255,255,255);
+    ecran.dessiner_rectangle(3.5*largeurMain-25+largeurBase+(ecran.get_sizeX_ecran(ecran)-2*largeurBase-5*largeurMain)/2,hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25,50, 50, 255, 255, 0, ecran); //Carré Argent
+    ecrire_texte(ecran, str,35,"LongTime.ttf",5+3.5*largeurMain-25+largeurBase+(ecran.get_sizeX_ecran(ecran)-2*largeurBase-5*largeurMain)/2,hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25,0,0,0);
 }
 
 
@@ -214,7 +170,8 @@ void Ecran::compteur_vie(int points, Ecran ecran)
     std::stringstream ss;
     ss << points;
     std::string str = ss.str();
-    ecrire_texte(ecran, str,65,"angelina.TTF",(largeurFenetre-6*largeurAchat-10)/2 + 6.2*largeurAchat+20,140,255,255,255);
+    ecran.dessiner_rectangle(4.5*largeurMain-25+largeurBase+(ecran.get_sizeX_ecran(ecran)-2*largeurBase-5*largeurMain)/2,hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25,50, 50, 0, 255, 0, ecran); //Carré Vie
+    ecrire_texte(ecran, str,35,"LongTime.ttf",5+4.5*largeurMain-25+largeurBase+(ecran.get_sizeX_ecran(ecran)-2*largeurBase-5*largeurMain)/2,hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25,0,0,0);
 }
 
 
@@ -289,13 +246,13 @@ int Ecran::interaction(Ecran ecran,int flag) // flag vaut 0 si menu et 1 sinon
 				break;
 
             case SDL_MOUSEBUTTONUP: //evenement souris
-            	if (flag==1)
+            	if (flag==1)//Dans le jeu
             	{
                 	if (event.button.button == SDL_BUTTON_RIGHT)
                     {
                         x = corner_x(event.button.x,event.button.y); //On récupère les coordonnées de l'angle de l'emplacement ou l'on clique
                         y = corner_y(event.button.x,event.button.y);
-                        for (int i = 0; i<compteur_rect; i++)
+                        /*for (int i = 0; i<compteur_rect; i++)
                         {
                             if (R[i]->x==x && R[i]->y==y)
                             {
@@ -313,7 +270,7 @@ int Ecran::interaction(Ecran ecran,int flag) // flag vaut 0 si menu et 1 sinon
                                     cout << "Griser image" << endl;
                                 }          
                             }
-                        }
+                        }*/
                         
                     }
 
@@ -327,6 +284,12 @@ int Ecran::interaction(Ecran ecran,int flag) // flag vaut 0 si menu et 1 sinon
                     	{
     					   ecran.coller_image(x,y,carte,ecran,0,0,1);
     					}
+
+                        if ((event.button.x>=0.6*largeurMain-25+largeurBase+(ecran.get_sizeX_ecran(ecran)-2*largeurBase-5*largeurMain)/2) && (event.button.x<=largeurMain+0.6*largeurMain-25+largeurBase+(ecran.get_sizeX_ecran(ecran)-2*largeurBase-5*largeurMain)/2) && (event.button.y>=hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25) && (event.button.y<=50+hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25))
+                        {
+                            cout<<"Tour fini !!"<<endl;
+                        }
+
                 	}
 					
 				}
@@ -336,19 +299,19 @@ int Ecran::interaction(Ecran ecran,int flag) // flag vaut 0 si menu et 1 sinon
                 	{
                 		x=event.button.x;
                 		y=event.button.y;
-                    	if (x>=300 && x <= 600 && y>=250 && y<=325) //Si on clique sur CONTINUE
+                    	if (x>=300 && x <= 510 && y>=250 && y<=325) //Si on clique sur CONTINUE
                     	{
     						continuer=0;
     						return 1;
     					}
 
-    					if (x>=325 && x<=565 && y>=350 && y<=425) //Si on clique sur ESCAP
+    					if (x>=325 && x<=485 && y>=350 && y<=425) //Si on clique sur ESCAP
     					{
     						continuer =0;
     						return flag;
     					}
 
-                        if (x>=300 && x<=600 && y>=450 && y<=525)//Si on clique sur Settings
+                        if (x>=200 && x<=620 && y>=460 && y<=510)//Si on clique sur les regles du jeu
                         {
                             continuer=0;
                             return 2;
@@ -363,7 +326,7 @@ int Ecran::interaction(Ecran ecran,int flag) // flag vaut 0 si menu et 1 sinon
                         x=event.button.x;
                         y=event.button.y;
                         
-                        if (x>=300 && x<=500 && y>=450 && y<=525)
+                        if (x>=300 && x<=500 && y>=740 && y<=790)
                         {
                             //continuer = 0;
                             return 0;
@@ -379,13 +342,12 @@ int Ecran::interaction(Ecran ecran,int flag) // flag vaut 0 si menu et 1 sinon
 
 void Ecran::dessiner_rectangle(int x, int y, int largeur, int hauteur, int r, int g, int b, Ecran ecran)
 {
-    SDL_Surface* Rect;
+    Rectangle rectangle = Rectangle(largeur,hauteur);
     SDL_Rect positionRect;
-    Rect = SDL_CreateRGBSurface(SDL_HWSURFACE, largeur, hauteur, 32, 0, 0, 0, 0); //rectangle des bases, 4 derniers param inutiles
     positionRect.x=x;
     positionRect.y=y;
-    SDL_FillRect(Rect, NULL, SDL_MapRGB(ecran.format, r, g, b)); // Dessin
-    SDL_BlitSurface(Rect, NULL, ecran.fenetre, &positionRect); // Collage
+    SDL_FillRect(rectangle.get_rect(), NULL, SDL_MapRGB(ecran.format, r, g, b)); // Dessin
+    SDL_BlitSurface(rectangle.get_rect(), NULL, ecran.fenetre, &positionRect); // Collage
 }
 
 
@@ -393,6 +355,12 @@ void Ecran::emplacements(Ecran ecran, int flag)
 {
 	if (flag==1) //Si on est dans l'écran de jeu
 	{
+
+        ecran.dessiner_rectangle(0, 0, largeurBase+10, hauteurFenetre, 255, 0, 0, ecran); //Fond rouge joueur 1
+        ecran.dessiner_rectangle(ecran.get_sizeX_ecran(ecran)-largeurBase-10, 0, largeurBase+10, hauteurFenetre, 0, 0, 255, ecran); //Fond bleu joueur 2
+        ecran.dessiner_rectangle(0.6*largeurMain-25+largeurBase+(ecran.get_sizeX_ecran(ecran)-2*largeurBase-5*largeurMain)/2,hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25,largeurMain,50,127,127,127, ecran);
+        ecran.ecrire_texte(ecran, "Fin de tour", 30, "LongTime.ttf", 0.6*largeurMain-25+largeurBase+(ecran.get_sizeX_ecran(ecran)-2*largeurBase-5*largeurMain)/2,hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25, 0, 0, 0);
+
 
     	//////////////////////PLACEMENTS DES RECTANGLES DES BASES A GAUCHE////////////////////
     	int k=0,l=0;
@@ -450,40 +418,57 @@ void Ecran::emplacements(Ecran ecran, int flag)
             }
         }
 
-        ecran.dessiner_rectangle(10,10,70, 50, 238, 130, 238, ecran);
+        ecran.dessiner_rectangle(largeurBase+10,hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25,50, 50, 255, 0, 0, ecran); //Carré Score joueur 1
         R[compteur_rect] = new Rectangle(10,10);
         compteur_rect++;
-        ecran.dessiner_rectangle(largeurFenetre-60,10,70, 50, 255, 127, 80, ecran);
+        ecran.dessiner_rectangle(ecran.get_sizeX_ecran(ecran)-largeurBase-60,hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25,50, 50, 0, 0, 255, ecran);//Carré Score joueur 2
         R[compteur_rect] = new Rectangle(largeurFenetre-60,10);
         compteur_rect++;
-        ecran.dessiner_rectangle((largeurFenetre-6*largeurAchat-10)/2 + 6.2*largeurAchat+20,20,50, 50, 255, 0, 0, ecran); //Attack
+        ecran.dessiner_rectangle(2.5*largeurMain-25+largeurBase+(ecran.get_sizeX_ecran(ecran)-2*largeurBase-5*largeurMain)/2,hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25,50, 50, 255, 0, 0, ecran); //Carré Attack
         R[compteur_rect] = new Rectangle((largeurFenetre-6*largeurAchat-10)/2 + 6.2*largeurAchat+20,20);
         compteur_rect++;
-        ecran.dessiner_rectangle((largeurFenetre-6*largeurAchat-10)/2 + 6.2*largeurAchat+20,80,50, 50, 255, 255, 0, ecran); //Argent
+        ecran.dessiner_rectangle(3.5*largeurMain-25+largeurBase+(ecran.get_sizeX_ecran(ecran)-2*largeurBase-5*largeurMain)/2,hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25,50, 50, 255, 255, 0, ecran); //Carré Argent
         R[compteur_rect] = new Rectangle((largeurFenetre-6*largeurAchat-10)/2 + 6.2*largeurAchat+20,80);
         compteur_rect++;
-        ecran.dessiner_rectangle((largeurFenetre-6*largeurAchat-10)/2 + 6.2*largeurAchat+20,140,50, 50, 0, 255, 0, ecran); //Vie
+        ecran.dessiner_rectangle(4.5*largeurMain-25+largeurBase+(ecran.get_sizeX_ecran(ecran)-2*largeurBase-5*largeurMain)/2,hauteurAchat+(ecran.get_sizeY_ecran(ecran)-3*hauteurMain-hauteurAchat)/2-25,50, 50, 0, 255, 0, ecran); //Carré Vie
         R[compteur_rect] = new Rectangle((largeurFenetre-6*largeurAchat-10)/2 + 6.2*largeurAchat+20,140);
         compteur_rect++;
+
+
        
 
     }
 
-    /*else //on est dans le menu
-    {
-    	SDL_Rect position1, position2;
-    	SDL_Surface *Button[2] = {NULL};
-		Button[0] = SDL_CreateRGBSurface(SDL_HWSURFACE, 300, 75, 32, 0, 0, 0, 0);
-		position1.x=300;
-		position1.y=300;
-		Button[1] = SDL_CreateRGBSurface(SDL_HWSURFACE, 240, 75, 32, 0, 0, 0, 0);
-		position2.x=325;
-		position2.y=400;
-		SDL_FillRect(Button[0], NULL, SDL_MapRGB(ecran.format, 255, 255, 255)); // Dessin
-		SDL_BlitSurface(Button[0], NULL, ecran.fenetre, &position1); // Collage
-		SDL_BlitSurface(Button[1], NULL, ecran.fenetre, &position2); // Collage
 
-    }*/
+    if (flag==0)
+    {
+        ecran.ecrire_texte(ecran,"CONTINUE",65,"BADABB__.TTF",300,250,255,255,0);
+        ecran.ecrire_texte(ecran,"ESCAPE",65,"BADABB__.TTF",325,350,255,255,0);
+        //ecran.dessiner_rectangle(200, 460, 420, 50,255,255,255, ecran);
+        ecran.ecrire_texte(ecran,"RULES OF THE GAME",65,"BADABB__.TTF",200,450,255,255,0);
+
+        /*SDL_Rect position1, position2;
+        SDL_Surface *Button[2] = {NULL};
+        Button[0] = SDL_CreateRGBSurface(SDL_HWSURFACE, 210, 75, 32, 0, 0, 0, 0);
+        position1.x=300;
+        position1.y=300;
+        Button[1] = SDL_CreateRGBSurface(SDL_HWSURFACE, 160, 75, 32, 0, 0, 0, 0);
+        position2.x=325;
+        position2.y=400;
+        SDL_FillRect(Button[0], NULL, SDL_MapRGB(ecran.format, 255, 255, 255)); // Dessin
+        SDL_FillRect(Button[1], NULL, SDL_MapRGB(ecran.format, 255, 255, 255)); // Dessin
+        SDL_BlitSurface(Button[0], NULL, ecran.fenetre, &position1); // Collage
+        SDL_BlitSurface(Button[1], NULL, ecran.fenetre, &position2); // Collage */
+    }
+
+    if (flag==2)
+    {
+
+        Image rules = Image("Rules.png",0,1);
+        ecran.coller_image(0, 0, rules, ecran, 0, 0 , 1);
+        //ecran.dessiner_rectangle(300, 740, 200, 50, 255, 255, 255, ecran);
+
+    }
     
 }
 

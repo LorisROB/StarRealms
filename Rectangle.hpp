@@ -17,16 +17,22 @@ using namespace std;
 
 class Rectangle
 {
-	public : //Attributs
-	string nom; // Nom unique de la forme "Rectx-y"
+	private: //Attributs
+	SDL_Surface* rect;
+	int largeurRectangle;
+	int hauteurRectangle;
+
+
+	/*string nom; // Nom unique de la forme "Rectx-y"
 	int x; // x et y du corner gauche
 	int y;
-	int is_image; // vaut 0 si il y a une image et 1 sinon
+	int is_image; // vaut 0 si il y a une image et 1 sinon*/
 
 
 	public :
-	Rectangle();
-	Rectangle(int corner_x, int corner_y); // Facteur par lequel on veut agrandir l'image
+	//Rectangle();
+	Rectangle(int hauteur, int largeur); // Facteur par lequel on veut agrandir l'image
+	SDL_Surface *get_rect();
 	//string get_nom();
 	//int get_x(Rectangle *R);
 	//int get_y(Rectangle *R);

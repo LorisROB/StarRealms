@@ -1,17 +1,22 @@
 #include "Rectangle.hpp"
 using namespace std;
 
-Rectangle::Rectangle()
+Rectangle::Rectangle(int largeur, int hauteur)
 {
-
-}
-
-Rectangle::Rectangle(int corner_x, int corner_y)
-{
-	x = corner_x;
+	/*x = corner_x;
 	y = corner_y;
 	nom = "Rect" + to_string(x) +"-" + to_string(y);
 	is_image = 1; // N'a pas d'image à la création
+	SDL_Rect positionRect;*/
+	hauteurRectangle = hauteur;
+	largeurRectangle=largeur;
+    rect = SDL_CreateRGBSurface(SDL_HWSURFACE, largeurRectangle, hauteurRectangle, 32, 0, 0, 0, 0); //rectangle des bases, 4 derniers param inutiles
+}
+
+
+SDL_Surface *Rectangle::get_rect()
+{
+	return rect;
 }
 /*
 int get_x(Rectangle *R)

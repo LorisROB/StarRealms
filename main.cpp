@@ -18,28 +18,21 @@ int main(int argc, char const *argv[])
         // Menu
         Ecran menu(800,800, "noir.jpeg");
         menu.emplacements(menu,0);
-        menu.ecrire_texte(menu,"CONTINUE",65,"AlphaWood.ttf",300,250,255,0,255);
-        menu.ecrire_texte(menu,"ESCAPE",65,"AlphaWood.ttf",325,350,255,0,255);
-        menu.ecrire_texte(menu,"SETTINGS",65,"AlphaWood.ttf",300,450,255,0,255);
         int flag = menu.interaction(menu,0); // On s'occupe de tous les évenements
 
 
         if (flag ==1)
         {
             // Table de jeu
-            //cout<<"Ecran"<<endl;
-            Ecran ecran(largeurFenetre,hauteurFenetre,"fond.jpg");
-            //cout<<"Empalvements"<<endl;
+            Ecran ecran(largeurFenetre,hauteurFenetre,"noir.jpeg");
             ecran.emplacements(ecran,flag);
-            ecran.compteur_score1(3, ecran);
-            ecran.compteur_score2(1, ecran);
-            ecran.compteur_attack(2,ecran);
+            int nb, p=0;
+            ecran.compteur_score1(56, ecran);
+            ecran.compteur_score2(99, ecran);
+            ecran.compteur_attack(99,ecran);
             ecran.compteur_argent(3, ecran);
             ecran.compteur_vie(4, ecran);
-            //cout<<"Flip"<<endl;
             SDL_Flip(ecran.get_fenetre(ecran)); //On réactualise l'écran
-            
-            //cout<<"interaction"<<endl;
             ecran.interaction(ecran, flag); // On s'occupe de tous les évenements
             cout<<"TailleX de l'écran : "<<ecran.get_sizeX_ecran(ecran)<<endl;
             cout<<"TailleY de l'écran : "<<ecran.get_sizeY_ecran(ecran)<<endl;
@@ -47,13 +40,14 @@ int main(int argc, char const *argv[])
         }
     
 
-        if (flag==2) //On est dans les settings
+        if (flag==2) //On est dans le help
         {
-            Ecran settings(1000,1000,"fond.jpg");
-            settings.ecrire_texte(settings,"Ecrire les settings",30,"angelina.TTF",300,250,255,0,255);
-            settings.ecrire_texte(settings,"Retour",65,"AlphaWood.ttf",300,450,255,0,255);
-            SDL_Flip(settings.get_fenetre(settings)); //On réactualise l'écran
-            settings.interaction(settings, flag); // On s'occupe de tous les évenements
+            Ecran help(800,800,"noir.jpeg");
+            help.emplacements(help,flag);
+            //help.ecrire_texte(help,"Ecrire les help",30,"angelina.TTF",300,250,255,0,255);
+            //help.ecrire_texte(help,"Retour",65,"AlphaWood.ttf",300,450,255,0,255);
+            SDL_Flip(help.get_fenetre(help)); //On réactualise l'écran
+            help.interaction(help, flag); // On s'occupe de tous les évenements
             i++;
             
 
